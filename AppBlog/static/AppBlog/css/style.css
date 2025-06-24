@@ -18,3 +18,9 @@ main {
 footer {
     background-color: seagreen;
 }
+li {
+  border-right: 1px solid #ccc;
+}
+ul :last-child {
+  border-right: none;
+}

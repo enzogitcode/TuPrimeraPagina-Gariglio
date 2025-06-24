@@ -10,14 +10,14 @@
     />
     <link rel="stylesheet" href="{% static 'AppBlog\css\style.css' %}" />
   
-    <title>{% block title %}Mi sitio{% endblock %}</title>
+    <title>CienciAR |{% block title %}{% endblock %}</title>
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg shadow-sm px-3">
+      <nav class="navbar navbar-expand-lg shadow-sm px-3 d-flex">
         <div class="container-fluid">
           <!-- Logo + Marca -->
-          <a class="navbar-brand d-flex align-items-center" href="#">
+          <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
             <img
               src="https://via.placeholder.com/40"
               alt="Logo"
@@ -31,11 +31,14 @@
           <!-- Ítems del menú a la derecha -->
           <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
-              <li class="nav-item rounded-pill bg-light">
+              <li class="nav-item">
                 <a class="nav-link" href="#">Profesores</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Papers</a>
+                <a class="nav-link" href="{% url 'students_list' %}">Students</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'papers_list' %}">Papers</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Artículos</a>
@@ -46,11 +49,12 @@
       </nav>
     </header>
     <main>
-      <h1>h1 desde base html</h1>
       {% block content %} {% endblock %}
     </main>
     <footer>
 <p> Este es el footer</p>
+        <p>&copy; 2024 Mi Sitio Web</p>
+
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>

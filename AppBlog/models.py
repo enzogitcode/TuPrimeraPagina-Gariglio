@@ -4,11 +4,18 @@ from django.db import models
 class User():
     pass
 class Student():
+    name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+
+    def __str__(self):
+        return f"{self.name} {self.last_name}"
+
     #name
     #last_name
     #email
-    #courses
-    #
+    #subjects
+    #college
     pass
 class Teacher():
     #name
