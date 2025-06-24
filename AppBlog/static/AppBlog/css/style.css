@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+}
+header {
+    background-color: turquoise;
+}
+
+main {
+  background-color: yellowgreen;
+}
+footer {
+    background-color: seagreen;
+}
