@@ -9,15 +9,20 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'AppBlog\css\style.css' %}" />
-  
+
     <title>CienciAR |{% block title %}{% endblock %}</title>
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg shadow-sm px-3 d-flex">
-        <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg shadow-sm px-3">
+        <div
+          class="container-fluid flex-column flex-lg-row align-items-start align-items-lg-center"
+        >
           <!-- Logo + Marca -->
-          <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+          <a
+            class="navbar-brand d-flex align-items-center mb-2 mb-lg-0"
+            href="{% url 'index' %}"
+          >
             <img
               src="https://via.placeholder.com/40"
               alt="Logo"
@@ -28,36 +33,64 @@
             <strong>CienciAR</strong>
           </a>
 
-          <!-- Ítems del menú a la derecha -->
-          <div class="collapse navbar-collapse justify-content-end">
+          <!-- Botón hamburguesa -->
+          <div
+            class="d-flex align-items-center justify-content-end w-100 mb-2 d-lg-none"
+          >
+            <span class="fw-semibold me-2">Menú</span>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#menuNav"
+              aria-controls="menuNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+
+          <!-- Ítems del menú -->
+          <div
+            class="collapse navbar-collapse justify-content-lg-end w-100"
+            id="menuNav"
+          >
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="#">Profesores</a>
+                <a class="nav-link" href="{% url 'teachers_list' %}"
+                  >Profesores</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'students_list' %}">Students</a>
+                <a class="nav-link" href="{% url 'students_list' %}"
+                  >Students</a
+                >
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'papers_list' %}">Papers</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Artículos</a>
+                <a class="nav-link" href="{% url 'articles_list' %}"
+                  >Artículos</a
+                >
               </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
-    <main class="d-flex flex-column align-items-center justify-content-center">
+    <main class="d-flex flex-column align-items-center p-2">
       {% block content %} {% endblock %}
     </main>
     <footer>
-      <div class="d-flex flex-column align-items-center justify-content-center text-center p-3 bg-light">
-        <p> Este es el footer</p>
+      <div
+        class="d-flex flex-column align-items-center justify-content-center text-center p-3 bg-light"
+      >
+        <p>Este es el footer</p>
 
         <p>&copy; 2025 Mi Sitio Web</p>
       </div>
-
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
