@@ -8,8 +8,8 @@ body {
   grid-template-rows: auto 1fr auto;
   min-height: 100dvh;
 }
-header {
-    background-color: turquoise;
+nav {
+    background: linear-gradient(360deg, #0077b6, #00b4d8, #90e0ef);
 }
 
 main {

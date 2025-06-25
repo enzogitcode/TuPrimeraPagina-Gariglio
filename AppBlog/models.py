@@ -6,26 +6,23 @@ class User():
 class Student():
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    college = models.CharField(max_length=100)
     email = models.EmailField()
 
     def __str__(self):
-        return f"{self.name} {self.last_name}"
+        return f"Se creó el estudiante {self.name} {self.last_name} con el correo {self.email}"
 
-    #name
-    #last_name
-    #email
-    #subjects
-    #college
-    pass
 class Teacher():
-    #name
-    #last_name
-    #email
-    #courses
+    name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    courses = models.CharField(max_length=100)
+    email = models.EmailField()
     pass
 class Article():
     #autor
     #tags
+    keywords = models.CharField(max_length=100)
+    date_of_publication = models.DateField(auto_now_add=True)
     #textPaper
     pass
 class Paper():
@@ -33,4 +30,5 @@ class Paper():
     #tags
     #abstract
     #textPaper
+    # date_of_publication = models.DateField(auto_now_add=True)
     pass
