@@ -21,14 +21,16 @@ class Teacher():
 class Article():
     #autor
     #tags
-    keywords = models.CharField(max_length=100)
+    keywords = models.CharField(max_length=100, max_size=5)
     date_of_publication = models.DateField(auto_now_add=True)
     #textPaper
     pass
 class Paper():
-    #autor
-    #tags
-    #abstract
-    #textPaper
-    # date_of_publication = models.DateField(auto_now_add=True)
+    autor_name = models.CharField(max_length=100)
+    autor_email = models.EmailField()
+    title = models.CharField(max_length=200)
+    abstract = models.CharField(max_length=500)
+    textPaper = models.TextField()
+    keywords = models.CharField(max_length=100, max_size=5)
+    date_of_publication = models.DateField(auto_now_add=True)
     pass
