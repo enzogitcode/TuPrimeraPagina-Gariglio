@@ -1,9 +1,8 @@
 from django.db import models
 
 # Create your models here.
-class User():
-    pass
-class Student():
+
+class Student(models.Model):
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     college = models.CharField(max_length=100)
@@ -12,25 +11,30 @@ class Student():
     def __str__(self):
         return f"Se creó el estudiante {self.name} {self.last_name} con el correo {self.email}"
 
-class Teacher():
+class Teacher(models.Model):
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     courses = models.CharField(max_length=100)
     email = models.EmailField()
-    pass
-class Article():
-    #autor
-    #tags
+    def __str__(self):
+        return f"Se creó el profesor {self.name} {self.last_name} con el correo {self.email}"
+class Article(models.Model):
+    author_name = models.CharField(max_length=100)
+    author_email = models.EmailField()
     keywords = models.CharField(max_length=100, max_size=5)
     date_of_publication = models.DateField(auto_now_add=True)
-    #textPaper
-    pass
-class Paper():
-    autor_name = models.CharField(max_length=100)
-    autor_email = models.EmailField()
+    title = models.CharField(max_length=200)
+    resume = models.CharField(max_length=500)
+    textArticle = models.TextField()
+    def __str__(self):
+        return f"Se creó el artículo {self.title} con el autor {self.author_name} y el correo {self.author_email}"
+class Paper(models.Model):
+    author_name = models.CharField(max_length=100)
+    author_email = models.EmailField()
     title = models.CharField(max_length=200)
     abstract = models.CharField(max_length=500)
     textPaper = models.TextField()
     keywords = models.CharField(max_length=100, max_size=5)
     date_of_publication = models.DateField(auto_now_add=True)
-    pass
+    def __str__(self):
+        return f"Se creó el artículo {self.title} con el autor {self.autor_name} y el correo {self.autor_email}"
