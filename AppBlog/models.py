@@ -5,7 +5,9 @@ from django.db import models
 class Student(models.Model):
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField()
     college = models.CharField(max_length=100)
+    courses = models.JSONField(default=list, blank=True)
     email = models.EmailField()
 
     def __str__(self):
@@ -14,7 +16,8 @@ class Student(models.Model):
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    courses = models.CharField(max_length=100)
+    age = models.PositiveIntegerField()
+    courses = models.JSONField(default=list, blank=True)
     email = models.EmailField()
     def __str__(self):
         return f"Se creó el profesor {self.name} {self.last_name} con el correo {self.email}"
