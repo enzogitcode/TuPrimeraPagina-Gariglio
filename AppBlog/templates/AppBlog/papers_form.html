@@ -1,0 +1,81 @@
+{% extends "AppBlog/base.html" %} 
+{% block title %}Formularios Papers{% endblock %} 
+{% block content %}
+
+<h1>Formulario de Papers</h1>
+
+<form method="post" action="{% url 'papers_form' %}">
+  {% csrf_token %} {{ form.as_p }}
+  <!-- Nombre del autor -->
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="id_author_name" name="author_name"
+         placeholder="Nombre del autor" value="{{ form.author_name.value|default_if_none:'' }}" required>
+  <label for="id_author_name">Nombre del Autor</label>
+</div>
+<!-- Apellido del autor -->
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="id_author_last_name" name="author_last_name"
+         placeholder="Apellido del autor"
+         value="{{ form.author_last_name.value|default_if_none:'' }}" required>
+  <label for="id_author_last_name">Apellido del Autor</label>
+</div>
+
+<!-- Email del autor -->
+<div class="form-floating mb-3">
+  <input type="email" class="form-control" id="id_author_email" name="author_email"
+         placeholder="Email" value="{{ form.author_email.value|default_if_none:'' }}" required>
+  <label for="id_author_email">Email del Autor</label>
+</div>
+
+<!-- Título -->
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="id_title" name="title"
+         placeholder="Título" value="{{ form.title.value|default_if_none:'' }}" required>
+  <label for="id_title">Título del Paper</label>
+</div>
+
+<!-- Palabras clave -->
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="id_keywords" name="keywords"
+         placeholder="palabras clave separadas por coma"
+         value="{{ form.keywords.value|join:', ' }}">
+  <label for="id_keywords">Palabras clave</label>
+</div>
+<!-- Abstract -->
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="id_abstract" name="abstract"
+         placeholder="Resumen" value="{{ form.abstract.value|default_if_none:'' }}" required>
+  <label for="id_abstract">Resumen (abstract)</label>
+</div>
+
+
+<!-- Texto del paper -->
+<div class="form-floating mb-3">
+  <textarea class="form-control" id="id_textPaper" name="textPaper"
+            placeholder="Texto completo del paper" style="height: 200px;">{{ form.textPaper.value|default_if_none:'' }}</textarea>
+  <label for="id_textPaper">Texto completo del Paper</label>
+</div>
+
+
+  <button type="submit" class="btn btn-primary">Enviar</button>
+  <a href="{% url 'papers_list' %}" class="btn btn-secondary"
+    >Volver a la lista</a
+  >
+</form>
+
+{% endblock %}
+
+{% block extra_content %}
+
+{% if form.errors %}
+<div class="alert alert-danger mt-3">
+  <strong>Errores en el formulario:</strong>
+  <ul>
+    {% for field in form %} {% for error in field.errors %}
+    <li>{{ error }}</li>
+    {% endfor %} {% endfor %} {% for error in form.non_field_errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %} {% endblock %}

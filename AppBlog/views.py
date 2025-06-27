@@ -12,3 +12,13 @@ def papers_list(request):
     return render(request, 'AppBlog/papers_list.html')
 def articles_list(request):
     return render(request, 'AppBlog/articles_list.html')
+
+
+def papers_form(request):
+    return render(request, 'AppBlog/papers_form.html')
+def articles_form(request):
+    return render(request, 'AppBlog/articles_form.html')
+def students_form(request):
+    return render(request, 'AppBlog/students_form.html')
+def teachers_form(request):
+    return render(request, 'AppBlog/teachers_form.html')

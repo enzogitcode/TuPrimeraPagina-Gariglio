@@ -20,8 +20,9 @@ class Teacher(models.Model):
         return f"Se creó el profesor {self.name} {self.last_name} con el correo {self.email}"
 class Article(models.Model):
     author_name = models.CharField(max_length=100)
+    author_last_name = models.CharField(max_length=100)
     author_email = models.EmailField()
-    keywords = models.CharField(max_length=100, max_size=5)
+    keywords = models.JSONField(default=list, blank=True)
     date_of_publication = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=200)
     resume = models.CharField(max_length=500)
@@ -30,11 +31,14 @@ class Article(models.Model):
         return f"Se creó el artículo {self.title} con el autor {self.author_name} y el correo {self.author_email}"
 class Paper(models.Model):
     author_name = models.CharField(max_length=100)
+    author_last_name = models.CharField(max_length=100)
     author_email = models.EmailField()
     title = models.CharField(max_length=200)
     abstract = models.CharField(max_length=500)
     textPaper = models.TextField()
-    keywords = models.CharField(max_length=100, max_size=5)
+    keywords = models.JSONField(default=list, blank=True)
     date_of_publication = models.DateField(auto_now_add=True)
     def __str__(self):
         return f"Se creó el artículo {self.title} con el autor {self.autor_name} y el correo {self.autor_email}"
+    
+    
