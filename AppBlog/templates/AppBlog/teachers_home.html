@@ -1,9 +1,21 @@
-{% extends "AppBlog/base.html" %}
-{% load static %}
+{% extends "AppBlog/base.html" %} {% load static %} 
 
-{% block title %}Students Home{% endblock %}
-
-<h1>Bievenidos Estudiantes</h1>
-
+{% block title %} Home Profesores
+Home{% endblock %} 
 
 {% block content %}
+<h1>Bienvenidos Profesores</h1>
+
+<div class="options-container">
+  <div class="option1">
+    <a href="{% url 'teachers_list' %}" class="btn btn-primary">
+      Ver Lista de Profesores
+    </a>
+  </div>
+  <div class="option2">
+    <a href="{% url 'teachers_form' %}" class="btn btn-secondary">
+      Formulario para agregar un nuevo profesor
+    </a>
+  </div>
+</div>
+{% endblock %}

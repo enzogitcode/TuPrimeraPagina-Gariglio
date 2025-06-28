@@ -9,13 +9,20 @@ def index(request):
 #Home
 def students_home(request):
     return render(request, 'AppBlog/students_home.html')
+def teachers_home(request):
+    return render(request, 'AppBlog/teachers_home.html')
+def papers_home(request):
+    return render(request, 'AppBlog/papers_home.html')
+def articles_home(request):
+    return render(request, 'AppBlog/articles_home.html')
 
 #Listas
 def teachers_list(request):
     return render(request, 'AppBlog/teachers_list.html')
 
 def students_list(request):
-    return render(request, 'AppBlog/students_list.html')
+    students = Student.objects.all()
+    return render(request, 'AppBlog/students_list.html', {'students': students})
 def papers_list(request):
     return render(request, 'AppBlog/papers_list.html')
 def articles_list(request):
@@ -47,7 +54,28 @@ def students_form(request):
 
 
 def teachers_form(request):
-    return render(request, 'AppBlog/teachers_form.html')
+    if request.method == 'POST':
+        teachers_form_1 = TeacherForm(request.POST)
+        if teachers_form_1.is_valid():
+            teacher = Teacher(
+                name=teachers_form_1.cleaned_data['name'],
+                last_name=teachers_form_1.cleaned_data['last_name'],
+                age=teachers_form_1.cleaned_data['age'],
+                college=teachers_form_1.cleaned_data['college'],
+                email=teachers_form_1.cleaned_data['email'],
+                career=teachers_form_1.cleaned_data['career'] 
+            )
+            teacher.save()
+            return render(request, 'AppBlog/teachers_list.html', {'teacher': teacher})
+        else:
+            return render(request, 'AppBlog/teachers_form.html', {
+                'form': teachers_form_1,
+                'error_message': 'Hay errores en el formulario.'
+            })
+    else:
+        form = TeacherForm()
+        return render(request, 'AppBlog/teachers_form.html', {'form': form})
+    
 def papers_form(request):
     return render(request, 'AppBlog/papers_form.html')
 def articles_form(request):
