@@ -1,7 +1,7 @@
 {% extends 'AppBlog/base.html' %} {% block content %}
 <h2>Formulario de estudiantes</h2>
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
+<form method="post" action="{% url 'students_form' %}">
+  {% csrf_token %} {{ students_form.as_t }}
 
   <div class="form-floating mb-3">
     <input
