@@ -1,0 +1,19 @@
+{% extends 'AppBlog/base.html' %}
+{% load static %}
+
+{% block title %}
+    Estudiantes - Buscar
+{% endblock %}
+
+{% block content %}
+    <h1>Búsqueda de estudiantes</h1>
+
+    <h2>Buscar estudiante por el email</h2>
+    <form action="students_results.html" method="post" class="mb-4">
+{% csrf_token %}
+        <input type="search" id="searchInput" placeholder="Buscar estudiantes..." class="form-control mb-3">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+    </form>
+    
+
+{% endblock %}

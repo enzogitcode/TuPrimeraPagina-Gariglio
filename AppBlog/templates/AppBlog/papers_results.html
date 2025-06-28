@@ -1,0 +1,24 @@
+{% extends 'AppBlog/base.html' %}
+{% load static %}
+
+{% block title %}
+    Papers
+{% endblock %}
+
+{% block content %}
+    <h1>Papers</h1>
+    <p>Estos son los papers que has subido:</p>
+    {% if papers %}
+        <ul>
+            {% for paper in papers %}
+                <li>{{ paper.title }}</li>
+                <li>{{ paper.author }}</li>
+                <li>{{ paper.date }}</li>
+            </ul>
+                <p>{{papper.abstract}}</p>
+                <p>{{paper.textPaper}} </p>
+            {% endfor %}
+    {% else %}
+        <p>No hay papers disponibles</p>
+    {% endif %}
+{% endblock %}
