@@ -13,6 +13,7 @@ class TeacherForm(forms.Form):
     last_name = forms.CharField(max_length=100, label='Apellido')
     age = forms.IntegerField(label='Edad', min_value=0, max_value=120)
     course = forms.CharField(max_length=100, label='Curso')
+    college = forms.CharField(max_length=100, label='Institución')
     email = forms.EmailField(label='Correo Electrónico')
 
 class ArticleForm(forms.Form):

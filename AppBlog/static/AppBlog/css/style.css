@@ -13,10 +13,10 @@ nav {
 }
 
 main {
-  background-color: yellowgreen;
+  background-color: lightcoral;
 }
 footer {
-    background-color: seagreen;
+    background-color: lightblue;
 }
 li {
   border-right: 1px solid #ccc;

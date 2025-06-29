@@ -4,9 +4,8 @@
 
 {% block content %}
 <h1>Lista de Profesores</h1>
-<h2>Podes buscar un profesor</h2>
 
-{% if students %}
+{% if teachers %}
 <div class="bg-light rounded">
 
     <table class="table table-striped rounded table-hover">
@@ -18,19 +17,18 @@
         <th>Curso</th>
         <th>Institución</th>
     </tr>
-    {% for student in students %}
+    {% for teacher in teachers %}
     <tr>
-            <td>{{ student.name }}</td>
-            <td>{{ student.last_name }}</td>
-            <td>{{ student.age }}</td>
-            <td>{{ student.email }}</td>
-            <td>{{ student.career }}</td>
-            <td>{{ student.college }}</td>
+            <td>{{ teacher.name }}</td>
+            <td>{{ teacher.last_name }}</td>
+            <td>{{ teacher.age }}</td>
+            <td>{{ teacher.email }}</td>
+            <td>{{ teacher.course }}</td>
+            <td>{{ teacher.college }}</td>
         </tr>
         {% endfor %}
     </table>
 </div>
-
 
 {% else %}
     <p>No hay profesores registrados.</p>

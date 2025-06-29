@@ -7,31 +7,40 @@ from django.http import HttpResponse
 def index(request):
     return render(request, 'AppBlog/index.html')
 
-#Home
+# students
 def students_home(request):
     return render(request, 'AppBlog/students_home.html')
-def teachers_home(request):
-    return render(request, 'AppBlog/teachers_home.html')
-def papers_home(request):
-    return render(request, 'AppBlog/papers_home.html')
-def articles_home(request):
-    return render(request, 'AppBlog/articles_home.html')
-
-#Listas
-def teachers_list(request):
-    return render(request, 'AppBlog/teachers_list.html')
-
 def students_list(request):
     students = Student.objects.all()
     return render(request, 'AppBlog/students_list.html', {'students': students})
-def papers_list(request):
-    return render(request, 'AppBlog/papers_list.html')
-def articles_list(request):
-    return render(request, 'AppBlog/articles_list.html')
-
-#Formularios
 def students_search(request):
     return render(request, 'AppBlog/students_search.html')
+
+def students_results(request):
+    keyword = request.GET.get('keyword') 
+    filtro = request.GET.get('filtro')   
+
+    students = Student.objects.all()
+
+    if keyword and filtro:
+        if filtro == 'name':
+            students = students.filter(name__icontains=keyword)
+        elif filtro == 'career':
+            students = students.filter(career__icontains=keyword)
+        elif filtro == 'college':
+            students = students.filter(college__icontains=keyword)
+        elif filtro == 'email':
+            students = students.filter(email__icontains=keyword)
+        elif filtro == 'age':
+            students = students.filter(age__icontains=keyword)
+
+    context = {
+        'students': students,
+        'keyword': keyword,
+        'filtro': filtro,
+    }
+
+    return render(request, "AppBlog/students_results.html", context)
 
 def students_form(request):
     if request.method == 'POST':
@@ -56,6 +65,10 @@ def students_form(request):
         form = StudentForm()
         return render(request, 'AppBlog/students_form.html', {'form': form})
 
+# teachers
+def teachers_home(request):
+    return render(request, 'AppBlog/teachers_home.html')
+
 def teachers_form(request):
     if request.method == 'POST':
         teachers_form_1 = TeacherForm(request.POST)
@@ -65,8 +78,8 @@ def teachers_form(request):
                 last_name=teachers_form_1.cleaned_data['last_name'],
                 age=teachers_form_1.cleaned_data['age'],
                 college=teachers_form_1.cleaned_data['college'],
+                course=teachers_form_1.cleaned_data['course'],
                 email=teachers_form_1.cleaned_data['email'],
-                career=teachers_form_1.cleaned_data['career'] 
             )
             teacher.save()
             return render(request, 'AppBlog/teachers_list.html', {'teacher': teacher})
@@ -78,6 +91,52 @@ def teachers_form(request):
     else:
         form = TeacherForm()
         return render(request, 'AppBlog/teachers_form.html', {'form': form})
+def teachers_results(request):
+    keyword = request.GET.get('keyword') 
+    filtro = request.GET.get('filtro')   
+
+    teachers = Teacher.objects.all()
+
+    if keyword and filtro:
+        if filtro == 'name':
+            teacher = teacher.filter(name__icontains=keyword)
+        elif filtro == 'course':
+            teacher = teacher.filter(course__icontains=keyword)
+        elif filtro == 'college':
+            teacher = teacher.filter(college__icontains=keyword)
+        elif filtro == 'email':
+            teacher = teacher.filter(email__icontains=keyword)
+        elif filtro == 'age':
+            teacher = teacher.filter(age__icontains=keyword)
+
+    context = {
+        'teachers': teachers,
+        'keyword': keyword,
+        'filtro': filtro,
+    }
+    return render(request, 'AppBlog/teachers_results.html')
+def teachers_list(request):
+    teachers = Teacher.objects.all()
+    return render(request, 'AppBlog/teachers_list.html', {'teachers': teachers})
+
+def teachers_search(request):
+    return render(request, 'AppBlog/teachers_search.html')
+
+def papers_home(request):
+    return render(request, 'AppBlog/papers_home.html')
+def articles_home(request):
+    return render(request, 'AppBlog/articles_home.html')
+
+
+
+
+def papers_list(request):
+    return render(request, 'AppBlog/papers_list.html')
+def articles_list(request):
+    return render(request, 'AppBlog/articles_list.html')
+
+
+
     
 def papers_form(request):
     return render(request, 'AppBlog/papers_form.html')
@@ -86,35 +145,11 @@ def articles_form(request):
 
 #búsquedas
 
-def students_results(request):
-    keyword = request.GET.get('keyword') 
-    filtro = request.GET.get('filtro')   
-
-    students = Student.objects.all()
-
-    if keyword and filtro:
-        if filtro == 'name':
-            students = students.filter(name__icontains=keyword)
-        elif filtro == 'career':
-            students = students.filter(career__icontains=keyword)
-        elif filtro == 'college':
-            students = students.filter(college__icontains=keyword)
-        elif filtro == 'email':
-            students = students.filter(email__icontains=keyword)
-        elif filtro == 'age':
-            students = students.filter(email__icontains=keyword)
-
-    context = {
-        'students': students,
-        'keyword': keyword,
-        'filtro': filtro,
-    }
-
-    return render(request, "AppBlog/students_results.html", context)
 
 
-def teachers_search(request):
-    return render(request, 'AppBlog/teachers_search.html')
+
+
+
 
 def papers_search(request):
     return render(request, 'AppBlog/papers_search.html')
@@ -122,8 +157,7 @@ def papers_search(request):
 def articles_search(request):
     return render(request, 'AppBlog/articles_search.html')
 
-def teachers_results(request):
-    return render(request, 'AppBlog/teachers_results.html')
+
 def papers_results(request):
     return render(request, 'AppBlog/papers_results.html')
 def articles_results(request):
