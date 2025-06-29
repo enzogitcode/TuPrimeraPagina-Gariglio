@@ -32,8 +32,7 @@ def articles_list(request):
 #Formularios
 def students_search(request):
     return render(request, 'AppBlog/students_search.html')
-# def students_results(request):
-#     return render(request, 'AppBlog/students_results.html')
+
 def students_form(request):
     if request.method == 'POST':
         students_form_1 = StudentForm(request.POST)
@@ -56,7 +55,6 @@ def students_form(request):
     else:
         form = StudentForm()
         return render(request, 'AppBlog/students_form.html', {'form': form})
-
 
 def teachers_form(request):
     if request.method == 'POST':
@@ -88,23 +86,38 @@ def articles_form(request):
 
 #búsquedas
 
-
 def students_results(request):
-    student_name = request.GET.get('name')
-    if student_name:
-        students = Student.objects.filter(name__icontains=student_name)
-        return render(request, "AppBlog/students_results.html", {"name": student_name, "students": students})
-    else:
-        return render(request, "AppBlog/students_results.html", {"students": []})
+    keyword = request.GET.get('keyword') 
+    filtro = request.GET.get('filtro')   
 
-    
+    students = Student.objects.all()
+
+    if keyword and filtro:
+        if filtro == 'name':
+            students = students.filter(name__icontains=keyword)
+        elif filtro == 'career':
+            students = students.filter(career__icontains=keyword)
+        elif filtro == 'college':
+            students = students.filter(college__icontains=keyword)
+        elif filtro == 'email':
+            students = students.filter(email__icontains=keyword)
+        elif filtro == 'age':
+            students = students.filter(email__icontains=keyword)
+
+    context = {
+        'students': students,
+        'keyword': keyword,
+        'filtro': filtro,
+    }
+
+    return render(request, "AppBlog/students_results.html", context)
+
+
 def teachers_search(request):
     return render(request, 'AppBlog/teachers_search.html')
 
-
 def papers_search(request):
     return render(request, 'AppBlog/papers_search.html')
-
 
 def articles_search(request):
     return render(request, 'AppBlog/articles_search.html')

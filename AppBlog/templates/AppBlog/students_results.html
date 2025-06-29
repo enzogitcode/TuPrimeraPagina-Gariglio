@@ -1,22 +1,40 @@
 {% extends "AppBlog/base.html" %} {% load static %} {% block title %} Resultados
 de Estudiantes {% endblock %} {% block content %}
 <h1>Resultados de Estudiantes</h1>
-<div id="searchResults">
-  {% if students %}
-  <ul class="list-group gap-2">
+{% if keyword and filtro %}
+  <h4 class="mb-4">
+    Resultados de búsqueda por 
+    {% if filtro == "name" %}nombre
+    {% elif filtro == "career" %}carrera
+    {% elif filtro == "college" %}college
+    {% elif filtro == "age" %}edad
+    {% elif filtro == "email" %}E-mail
+    {% elif filtro == "last_name" %}apellido
+
+    {% else %}criterio desconocido
+    {% endif %}
+    que contiene "<strong>{{ keyword }}</strong>"
+  </h4>
+{% endif %}
+
+{% if students %}
+<div class="rounded">
+
+  <ul class="list-group gap-3 rounded">
     {% for student in students %}
     <li class="list-group-item">
-      <p>Nombre: {{ student.name }}</p>
-      <p>Apellido: {{ student.last_name }}</p>
-      <p>Edad: {{ student.age }}</p>
-      <p>E-mail: {{ student.email }}</p>
-      <p>Carrera: {{ student.career }}</p>
-      <p>Universidad: {{ student.college }}</p>
+      <p><strong>Nombre:</strong> {{ student.name }}</p>
+      <p><strong>Apellio:</strong> {{ student.last_name }}</p>
+      <p><strong>Edad:</strong> {{ student.age }}</p>
+      <p><strong>E-mail:</strong> {{ student.email }}</p>
+      <p><strong>Carrera:</strong> {{ student.career }}</p>
+      <p><strong>Institución:</strong> {{ student.college }}</p>
     </li>
     {% endfor %}
   </ul>
-  {% else %}
-  <p>No se encontraron estudiantes.</p>
-  {% endif %}
 </div>
+{% else %}
+  <p class="text-muted">No se encontraron estudiantes que coincidan con la búsqueda.</p>
+{% endif %}
+
 {% endblock %}
