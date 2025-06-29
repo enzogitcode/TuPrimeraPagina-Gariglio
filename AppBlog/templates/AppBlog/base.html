@@ -80,7 +80,7 @@
         </div>
       </nav>
     </header>
-    <main class="main-principal d-flex flex-column align-items-center pt-2 pb-2 pl-1 pr-1">
+    <main class="main-principal align-items-center pt-2 pb-2 pl-1 pr-1 {% block extra_main_classes %} d-flex flex-column {% endblock %}">
       {% block content %} {% endblock %}
     </main>
     <footer>
@@ -89,7 +89,7 @@
       >
         <p>Este es el footer</p>
 
-        <p>&copy; 2025 Mi Sitio Web</p>
+        <p>&copy; 2025- Enzo Gariglio - Mi Sitio Web</p>
       </div>
       
     </footer>

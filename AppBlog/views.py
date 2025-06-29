@@ -8,6 +8,7 @@ def index(request):
     return render(request, 'AppBlog/index.html')
 
 # students
+
 def students_home(request):
     return render(request, 'AppBlog/students_home.html')
 def students_list(request):
@@ -48,7 +49,6 @@ def students_results(request):
             'students': students,
             'error_message': 'No se encontraron resultados.'
         })
-
 
 def students_form(request):
     if request.method == 'POST':
@@ -135,44 +135,39 @@ def teachers_list(request):
 def teachers_search(request):
     return render(request, 'AppBlog/teachers_search.html')
 
+# Papers
 def papers_home(request):
     return render(request, 'AppBlog/papers_home.html')
-def articles_home(request):
-    return render(request, 'AppBlog/articles_home.html')
-
-
-
 
 def papers_list(request):
     return render(request, 'AppBlog/papers_list.html')
-def articles_list(request):
-    return render(request, 'AppBlog/articles_list.html')
 
-
-
-    
 def papers_form(request):
     return render(request, 'AppBlog/papers_form.html')
-def articles_form(request):
-    return render(request, 'AppBlog/articles_form.html')
-
-#búsquedas
-
-
-
-
-
+def papers_form(request):
+    form = PaperForm() 
+    return render(request, 'AppBlog/papers_form.html', {'form': form})
 
 
 def papers_search(request):
     return render(request, 'AppBlog/papers_search.html')
 
+def papers_results(request):
+    return render(request, 'AppBlog/papers_results.html')
+
+# Articles
+def articles_home(request):
+    return render(request, 'AppBlog/articles_home.html')
+
+def articles_list(request):
+    return render(request, 'AppBlog/articles_list.html')
+    
+def articles_form(request):
+    return render(request, 'AppBlog/articles_form.html')
+
 def articles_search(request):
     return render(request, 'AppBlog/articles_search.html')
 
-
-def papers_results(request):
-    return render(request, 'AppBlog/papers_results.html')
 def articles_results(request):
     return render(request, 'AppBlog/articles_results.html')
 

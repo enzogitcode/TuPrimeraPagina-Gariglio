@@ -1,0 +1,29 @@
+{% extends 'AppBlog/base.html' %}
+{% load static %}
+
+{% block title %}
+    Búsqueda de Papers
+{% endblock %}
+
+{% block content %}
+    <h1>Búsqueda de Papers</h1>
+
+    <p>Utiliza el formulario a continuación para buscar Papers por nombre, carrera o universidad.</p>
+<form action="{% url 'papers_results' %}" method="get" class="mb-4">
+  {% csrf_token %}
+
+  <!-- Campo de texto para la búsqueda -->
+  <input name="keyword" type="text" placeholder="Buscar..." class="form-control mb-3" value="{{ keyword }}">
+
+  <!-- Dropdown para elegir el criterio de búsqueda -->
+  <select name="filtro" class="form-select mb-3">
+    <option value="name" {% if filtro == 'name' %}selected{% endif %}>Autor</option>
+    
+  </select>
+
+  <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+
+{% endblock %}
+

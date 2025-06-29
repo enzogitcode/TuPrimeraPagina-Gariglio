@@ -30,6 +30,6 @@ class PaperForm(forms.Form):
     author_last_name = forms.CharField(max_length=100, label='Apellido del Autor')
     author_email = forms.EmailField(label='Correo Electrónico del Autor')
     title = forms.CharField(max_length=200, label='Título')
-    abstract = forms.CharField(max_length=500, label='Resumen')
+    subject = forms.CharField(max_length=500, label='Categoría')
+    abstract = forms.CharField(widget=forms.Textarea, max_length=500, label='Resumen')
     textPaper = forms.CharField(widget=forms.Textarea, label='Texto del Artículo')
-    subject = forms.CharField(max_length=500, label='Palabras Clave', required=False)
