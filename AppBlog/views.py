@@ -163,7 +163,8 @@ def articles_list(request):
     return render(request, 'AppBlog/articles_list.html')
     
 def articles_form(request):
-    return render(request, 'AppBlog/articles_form.html')
+    form= ArticleForm()
+    return render(request, 'AppBlog/articles_form.html', {'form': form})
 
 def articles_search(request):
     return render(request, 'AppBlog/articles_search.html')

@@ -3,13 +3,13 @@
 {% block extra_main_classes %} no-flex-column {% endblock %} 
 {% block content %}
 <h1 class="text-center">Formulario de Papers</h1>
-<div class="papers_form_container p-2">
+<div class="papers_form_container p-2 text-center align-items-center justify-content-center gap-4">
 {% load static %}
 <form method="post">
   {% csrf_token %}
   <div class="form-grid">
 
-    <div class="autor">
+    <div class="autor mb-2">
       <h3>Datos del Autor</h3>
       {{ form.author_name.label_tag }} {{ form.author_name }}
       {{ form.author_last_name.label_tag }} {{ form.author_last_name }}
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Área completa -->
-    <div class="texto d-flex flex-column">
+    <div class="texto d-flex flex-column mb-2">
             <h3>Datos del Paper</h3>
 
       {{ form.subject.label_tag }} {{ form.subject }}
@@ -26,8 +26,10 @@
       {{ form.textPaper.label_tag }} {{ form.textPaper }}
     </div>
   </div>
-
+<div class="buttons_div align-items-center justify-content-center">
+  <button type="reset" class="btn btn-danger mt-3 text-center">Restablecer</button>
   <button type="submit" class="btn btn-primary mt-3 text-center">Enviar</button>
+</div>
 </form>
 
 
