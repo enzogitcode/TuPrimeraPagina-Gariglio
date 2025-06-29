@@ -99,22 +99,23 @@ def teachers_results(request):
 
     if keyword and filtro:
         if filtro == 'name':
-            teacher = teacher.filter(name__icontains=keyword)
+            teacher = teachers.filter(name__icontains=keyword)
         elif filtro == 'course':
-            teacher = teacher.filter(course__icontains=keyword)
+            teacher = teachers.filter(course__icontains=keyword)
         elif filtro == 'college':
-            teacher = teacher.filter(college__icontains=keyword)
+            teacher = teachers.filter(college__icontains=keyword)
         elif filtro == 'email':
-            teacher = teacher.filter(email__icontains=keyword)
+            teacher = teachers.filter(email__icontains=keyword)
         elif filtro == 'age':
-            teacher = teacher.filter(age__icontains=keyword)
+            teacher = teachers.filter(age__icontains=keyword)
 
     context = {
         'teachers': teachers,
         'keyword': keyword,
         'filtro': filtro,
     }
-    return render(request, 'AppBlog/teachers_results.html')
+    return render(request, 'AppBlog/teachers_results.html', context)
+
 def teachers_list(request):
     teachers = Teacher.objects.all()
     return render(request, 'AppBlog/teachers_list.html', {'teachers': teachers})

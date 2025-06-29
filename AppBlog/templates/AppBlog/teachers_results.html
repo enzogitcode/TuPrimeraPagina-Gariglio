@@ -23,12 +23,12 @@ de Profesores {% endblock %} {% block content %}
   <ul class="list-group gap-3 rounded">
     {% for teacher in teachers %}
     <li class="list-group-item">
-      <p><strong>Nombre:</strong> {{ student.name }}</p>
-      <p><strong>Apellio:</strong> {{ student.last_name }}</p>
-      <p><strong>Edad:</strong> {{ student.age }}</p>
-      <p><strong>E-mail:</strong> {{ student.email }}</p>
-      <p><strong>Curso:</strong> {{ student.course }}</p>
-      <p><strong>Institución:</strong> {{ student.college }}</p>
+      <p><strong>Nombre:</strong> {{ teacher.name }}</p>
+      <p><strong>Apellio:</strong> {{ teacher.last_name }}</p>
+      <p><strong>Edad:</strong> {{ teacher.age }}</p>
+      <p><strong>E-mail:</strong> {{ teacher.email }}</p>
+      <p><strong>Curso:</strong> {{ teacher.course }}</p>
+      <p><strong>Institución:</strong> {{ teacher.college }}</p>
     </li>
     {% endfor %}
   </ul>
