@@ -30,6 +30,10 @@ def articles_list(request):
     return render(request, 'AppBlog/articles_list.html')
 
 #Formularios
+def students_search(request):
+    return render(request, 'AppBlog/students_search.html')
+# def students_results(request):
+#     return render(request, 'AppBlog/students_results.html')
 def students_form(request):
     if request.method == 'POST':
         students_form_1 = StudentForm(request.POST)
@@ -83,23 +87,16 @@ def articles_form(request):
     return render(request, 'AppBlog/articles_form.html')
 
 #búsquedas
-def students_search(request):
-    return render(request, 'AppBlog/students_search.html')
+
+
 def students_results(request):
-    return render(request, 'AppBlog/students_results.html')
-def search_student_by_email(request):
-    if request.GET["email"]:
-        #respuesta = f"Estoy buscando la camada nro: {request.GET['camada'] }"
-        student_email = request.GET['email']
-        # icontains es un filtro que se usa para buscar coincidencias en los campos de texto de la base de datos, 
-        # sin importar si las letras están en mayúsculas o minúsculas
-        student_email = Student.objects.filter(student_incontains=student_email)
-
-        return render(request, "AppBlog/students_results.html", {"student_email": student_email})
-
+    student_name = request.GET.get('name')
+    if student_name:
+        students = Student.objects.filter(name__icontains=student_name)
+        return render(request, "AppBlog/students_results.html", {"name": student_name, "students": students})
     else:
-        respuesta = "No enviaste datos"
-        return HttpResponse(respuesta)
+        return render(request, "AppBlog/students_results.html", {"students": []})
+
     
 def teachers_search(request):
     return render(request, 'AppBlog/teachers_search.html')

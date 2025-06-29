@@ -1,26 +1,22 @@
-{% extends "AppBlog/base.html" %}
-{% load static %}
-
-{% block title %}
-    Resultados de Estudiantes
-{% endblock %}
-
-{% block content %}
-    <h1>Resultados de Estudiantes</h1>
-    <div id="searchResults">
-        {% if students %}
-            <ul class="list-group">
-                {% for student in students %}
-                    <li class="list-group-item">
-                        <a href="{% url 'student_detail' student.id %}">{{ student.email }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No se encontraron estudiantes.</p>
-        {% endif %}
-    </div>
-    {% else %}
-        <p>No hay papers disponibles.</p>
-    {% endif %}
+{% extends "AppBlog/base.html" %} {% load static %} {% block title %} Resultados
+de Estudiantes {% endblock %} {% block content %}
+<h1>Resultados de Estudiantes</h1>
+<div id="searchResults">
+  {% if students %}
+  <ul class="list-group gap-2">
+    {% for student in students %}
+    <li class="list-group-item">
+      <p>Nombre: {{ student.name }}</p>
+      <p>Apellido: {{ student.last_name }}</p>
+      <p>Edad: {{ student.age }}</p>
+      <p>E-mail: {{ student.email }}</p>
+      <p>Carrera: {{ student.career }}</p>
+      <p>Universidad: {{ student.college }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No se encontraron estudiantes.</p>
+  {% endif %}
+</div>
 {% endblock %}
