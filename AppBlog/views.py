@@ -25,6 +25,8 @@ def students_results(request):
     if keyword and filtro:
         if filtro == 'name':
             students = students.filter(name__icontains=keyword)
+        if filtro == 'last_name':
+            students = students.filter(last_name__icontains=keyword)
         elif filtro == 'career':
             students = students.filter(career__icontains=keyword)
         elif filtro == 'college':
@@ -34,13 +36,19 @@ def students_results(request):
         elif filtro == 'age':
             students = students.filter(age__icontains=keyword)
 
-    context = {
-        'students': students,
-        'keyword': keyword,
-        'filtro': filtro,
-    }
+        context = {
+            'students': students,
+            'keyword': keyword,
+            'filtro': filtro,
+        }
+        return render(request, "AppBlog/students_results.html", context)
+    
+    else:
+        return render(request, "AppBlog/students_results.html", {
+            'students': students,
+            'error_message': 'No se encontraron resultados.'
+        })
 
-    return render(request, "AppBlog/students_results.html", context)
 
 def students_form(request):
     if request.method == 'POST':
@@ -91,6 +99,8 @@ def teachers_form(request):
     else:
         form = TeacherForm()
         return render(request, 'AppBlog/teachers_form.html', {'form': form})
+    
+
 def teachers_results(request):
     keyword = request.GET.get('keyword') 
     filtro = request.GET.get('filtro')   
@@ -99,15 +109,17 @@ def teachers_results(request):
 
     if keyword and filtro:
         if filtro == 'name':
-            teacher = teachers.filter(name__icontains=keyword)
+            teachers = teachers.filter(name__icontains=keyword)
+        elif filtro == 'last_name':
+            teachers = teachers.filter(last_name__icontains=keyword)
         elif filtro == 'course':
-            teacher = teachers.filter(course__icontains=keyword)
+            teachers = teachers.filter(course__icontains=keyword)
         elif filtro == 'college':
-            teacher = teachers.filter(college__icontains=keyword)
+            teachers = teachers.filter(college__icontains=keyword)
         elif filtro == 'email':
-            teacher = teachers.filter(email__icontains=keyword)
+            teachers = teachers.filter(email__icontains=keyword)
         elif filtro == 'age':
-            teacher = teachers.filter(age__icontains=keyword)
+            teachers = teachers.filter(age__icontains=keyword)
 
     context = {
         'teachers': teachers,
