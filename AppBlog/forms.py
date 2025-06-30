@@ -23,7 +23,7 @@ class ArticleForm(forms.Form):
     subject = forms.CharField(max_length=500, label='Categoría')
     title = forms.CharField(max_length=200, label='Título')
     resume = forms.CharField(widget=forms.Textarea, max_length=500, label='Resumen')
-    textArticle = forms.CharField(widget=forms.Textarea, label='Texto del Artículo')
+    text_article = forms.CharField(widget=forms.Textarea, label='Texto del Artículo')
 
 class PaperForm(forms.Form):
     author_name = forms.CharField(max_length=100, label='Nombre del Autor')

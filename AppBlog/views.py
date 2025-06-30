@@ -163,6 +163,25 @@ def articles_list(request):
     return render(request, 'AppBlog/articles_list.html')
     
 def articles_form(request):
+    if request.method == 'POST':
+        articles_form_1 = ArticleForm(request.POST)
+        if articles_form_1.is_valid():
+            article = Article(
+                author_name=articles_form_1.cleaned_data['author_name'],
+                author_last_name=articles_form_1.cleaned_data['author_last_name'],
+                author_email=articles_form_1.cleaned_data['author_email'],
+                subject=articles_form_1.cleaned_data['subject'],
+                title=articles_form_1.cleaned_data['title'],
+                resume=articles_form_1.cleaned_data['resume'],
+                text_article=articles_form_1.cleaned_data['text_article']
+            )
+            article.save()
+            return render(request, 'AppBlog/articles_list.html', {'article': article})
+        else:
+            return render(request, 'AppBlog/articles_form.html', {
+                'form': articles_form_1,
+                'error_message': 'Hay errores en el formulario.'
+            })
     form= ArticleForm()
     return render(request, 'AppBlog/articles_form.html', {'form': form})
 
