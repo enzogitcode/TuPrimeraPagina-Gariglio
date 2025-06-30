@@ -2,28 +2,30 @@
 {% load static %}
 
 {% block title %}
-  Búsqueda de artículos
+    Búsqueda de artículos
 {% endblock %}
 
 {% block content %}
-  <h1>Búsqueda de artículos</h1>
+    <h1>Búsqueda de artículos</h1>
 
-  <h2>Buscar artículo por</h2>
-  <p>Utiliza el formulario a continuación para buscar artículos por título, autor o categoría.</p>
-  <form action="{% url 'articles_results' %}" method="get" class="mb-4">
-    {% csrf_token %}
+    <h2>Buscar artículo por</h2>
+    <p>Utiliza el formulario a continuación para buscar artículos por autor, título o palabras clave.</p>
 
-    <!-- Campo de texto para la búsqueda -->
-    <input name="keyword" type="text" placeholder="Buscar..." class="form-control mb-3" value="{{ keyword }}">
+    <form action="{% url 'articles_results' %}" method="get" class="mb-4">
+      {% csrf_token %}
 
-    <!-- Dropdown para elegir el criterio de búsqueda -->
-    <select name="filtro" class="form-select mb-3">
-    <option value="title" {% if filtro == 'title' %}selected{% endif %}>Título</option>
-    <option value="author" {% if filtro == 'author' %}selected{% endif %}>Autor</option>
-    <option value="category" {% if filtro == 'category' %}selected{% endif %}>Categoría</option>
-    <option value="date" {% if filtro == 'date' %}selected{% endif %}>Fecha</option>
-    </select>
+      <!-- Campo de texto para la búsqueda -->
+      <input name="keyword" type="text" placeholder="Buscar..." class="form-control mb-3" value="{{ keyword }}">
 
-    <button type="submit" class="btn btn-primary">Buscar</button>
-  </form>
+      <!-- Dropdown para elegir el criterio de búsqueda -->
+      <select name="filtro" class="form-select mb-3">
+        <option value="author_name" {% if filtro == 'author_name' %}selected{% endif %}>Nombre del Autor</option>
+        <option value="author_last_name" {% if filtro == 'author_last_name' %}selected{% endif %}>Apellido del Autor</option>
+        <option value="title" {% if filtro == 'title' %}selected{% endif %}>Título</option>
+        <option value="subject" {% if filtro == 'subject' %}selected{% endif %}>Palabras Clave</option>
+        <option value="resume" {% if filtro == 'resume' %}selected{% endif %}>Resumen</option>
+      </select>
+
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
 {% endblock %}

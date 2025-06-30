@@ -1,0 +1,45 @@
+{% extends "AppBlog/base.html" %}
+{% load static %}
+
+{% block title %}Resultados de Artículos{% endblock %}
+
+{% block content %}
+<h1>Resultados de Artículos</h1>
+
+{% if keyword and filtro %}
+  <h4 class="mb-4">
+    Resultados de búsqueda por 
+    {% if filtro == "author_name" %}nombre del autor
+    {% elif filtro == "author_last_name" %}apellido del autor
+    {% elif filtro == "title" %}título
+    {% elif filtro == "subject" %}palabras clave
+    {% elif filtro == "resume" %}resumen
+    {% else %}criterio desconocido
+    {% endif %}
+    que contiene "<strong>{{ keyword }}</strong>"
+  </h4>
+{% endif %}
+
+{% if articles %}
+<div class="rounded">
+  <ul class="list-group gap-3 rounded">
+    {% for article in articles %}
+    <li class="list-group-item">
+      <p><strong>Título:</strong> {{ article.title }}</p>
+      <p><strong>Autor:</strong> {{ article.author_name }} {{ article.author_last_name }}</p>
+      <p><strong>E-mail:</strong> {{ article.author_email }}</p>
+      <p><strong>Palabras clave:</strong> {{ article.subject }}</p>
+      <p><strong>Resumen:</strong> {{ article.resume }}</p>
+      <details>
+        <summary class="text-primary">Ver texto completo</summary>
+        <p class="small mt-2">{{ article.text_article }}</p>
+      </details>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% else %}
+  <p class="text-muted">No se encontraron artículos que coincidan con la búsqueda.</p>
+{% endif %}
+
+{% endblock %}

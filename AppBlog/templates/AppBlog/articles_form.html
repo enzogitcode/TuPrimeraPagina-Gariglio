@@ -5,7 +5,7 @@
 <h1 class="text-center">Formulario de Artículos Informativos</h1>
 <div class="articles_form_container p-2 text-center align-items-center justify-content-center gap-4">
 {% load static %}
-<form method="post">
+<form method="post" action="{% url 'articles_form' %}">
   {% csrf_token %}
   <div class="form-grid">
 

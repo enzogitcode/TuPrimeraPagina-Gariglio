@@ -140,27 +140,67 @@ def papers_home(request):
     return render(request, 'AppBlog/papers_home.html')
 
 def papers_list(request):
-    return render(request, 'AppBlog/papers_list.html')
+    papers = Paper.objects.all()
+    return render(request, 'AppBlog/papers_list.html', {'papers': papers})
 
 def papers_form(request):
     return render(request, 'AppBlog/papers_form.html')
+
+from django.shortcuts import render, redirect
+from .forms import PaperForm
+from .models import Paper
+
 def papers_form(request):
-    form = PaperForm() 
-    return render(request, 'AppBlog/papers_form.html', {'form': form})
+    if request.method == 'POST':
+        papers_form_1 = PaperForm(request.POST)
+        if papers_form_1.is_valid():
+            paper = Paper(
+                author_name=papers_form_1.cleaned_data['author_name'],
+                author_last_name=papers_form_1.cleaned_data['author_last_name'],
+                author_email=papers_form_1.cleaned_data['author_email'],
+                subject=papers_form_1.cleaned_data['subject'],
+                title=papers_form_1.cleaned_data['title'],
+                abstract=papers_form_1.cleaned_data['abstract'],
+                text_paper=papers_form_1.cleaned_data['text_paper']  
+            )
+            paper.save()
+            return render(request, 'AppBlog/papers_list.html', {'paper': paper})
+        else:
+            return render(request, 'AppBlog/papers_form.html', {
+                'form': papers_form_1,
+                'error_message': 'Hay errores en el formulario.'
+            })
+    else:
+        form = PaperForm()
+        return render(request, 'AppBlog/papers_form.html', {'form': form})
 
 
 def papers_search(request):
     return render(request, 'AppBlog/papers_search.html')
 
 def papers_results(request):
-    return render(request, 'AppBlog/papers_results.html')
+    keyword = request.GET.get('keyword', '').strip()
+    filtro = request.GET.get('filtro', '')
+
+    if keyword and filtro in ['author_name', 'author_last_name', 'title', 'subject', 'abstract']:
+        filtro_kwargs = {f"{filtro}__icontains": keyword}
+        papers = Paper.objects.filter(**filtro_kwargs)
+    else:
+        papers = Paper.objects.none()
+
+    return render(request, 'AppBlog/papers_results.html', {
+        'papers': papers,
+        'keyword': keyword,
+        'filtro': filtro
+    })
 
 # Articles
 def articles_home(request):
     return render(request, 'AppBlog/articles_home.html')
 
 def articles_list(request):
-    return render(request, 'AppBlog/articles_list.html')
+    articles= Article.objects.all()
+    return render(request, 'AppBlog/articles_list.html', {'articles': articles})
     
 def articles_form(request):
     if request.method == 'POST':
@@ -182,12 +222,27 @@ def articles_form(request):
                 'form': articles_form_1,
                 'error_message': 'Hay errores en el formulario.'
             })
-    form= ArticleForm()
-    return render(request, 'AppBlog/articles_form.html', {'form': form})
+    else: 
+        form= ArticleForm()
+        return render(request, 'AppBlog/articles_form.html', {'form': form})
 
 def articles_search(request):
     return render(request, 'AppBlog/articles_search.html')
 
 def articles_results(request):
-    return render(request, 'AppBlog/articles_results.html')
+    keyword = request.GET.get('keyword', '').strip()
+    filtro = request.GET.get('filtro', '')
+
+    if keyword and filtro in ['author_name', 'author_last_name', 'title', 'subject', 'resume']:
+        filtro_kwargs = {f"{filtro}__icontains": keyword}
+        articles = Article.objects.filter(**filtro_kwargs)
+    else:
+        articles = Article.objects.none()
+
+    return render(request, 'AppBlog/articles_results.html', {
+        'articles': articles,
+        'keyword': keyword,
+        'filtro': filtro
+    })
+
 
