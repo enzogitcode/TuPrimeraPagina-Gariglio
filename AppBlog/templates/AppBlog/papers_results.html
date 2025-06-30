@@ -1,24 +1,45 @@
-{% extends 'AppBlog/base.html' %}
+{% extends "AppBlog/base.html" %}
 {% load static %}
 
-{% block title %}
-    Papers
-{% endblock %}
+{% block title %}Resultados de Papers{% endblock %}
 
 {% block content %}
-    <h1>Papers</h1>
-    <p>Estos son los papers que has subido:</p>
-    {% if papers %}
-        <ul>
-            {% for paper in papers %}
-                <li>{{ paper.title }}</li>
-                <li>{{ paper.author }}</li>
-                <li>{{ paper.date }}</li>
-            </ul>
-                <p>{{papper.abstract}}</p>
-                <p>{{paper.text_paper}} </p>
-            {% endfor %}
-    {% else %}
-        <p>No hay papers disponibles</p>
+<h1>Resultados de Papers</h1>
+
+{% if keyword and filtro %}
+  <h4 class="mb-4">
+    Resultados de búsqueda por 
+    {% if filtro == "author_name" %}nombre del autor
+    {% elif filtro == "author_last_name" %}apellido del autor
+    {% elif filtro == "title" %}título
+    {% elif filtro == "subject" %}categoría
+    {% elif filtro == "abstract" %}resumen
+    {% else %}criterio desconocido
     {% endif %}
+    que contiene "<strong>{{ keyword }}</strong>"
+  </h4>
+{% endif %}
+
+{% if papers %}
+<div class="rounded text-center">
+  <ul class="list-group gap-3 rounded">
+    {% for paper in papers %}
+    <li class="list-group-item">
+      <p><strong>Título:</strong> {{ paper.title }}</p>
+      <p><strong>Autor:</strong> {{ paper.author_name }} {{ paper.author_last_name }}</p>
+      <p><strong>E-mail:</strong> {{ paper.author_email }}</p>
+      <p><strong>Categoría:</strong> {{ paper.subject }}</p>
+      <p><strong>Resumen:</strong> {{ paper.abstract }}</p>
+      <p><strong>Fecha de Publicación:</strong> {{ paper.date_of_publication }}</p>
+      <details>
+        <summary class="text-primary">Ver texto completo</summary>
+        <p class="small mt-2">{{ paper.text_paper }}</p>
+      </details>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% else %}
+  <p class="text-muted">No se encontraron papers que coincidan con la búsqueda.</p>
+{% endif %}
 {% endblock %}
