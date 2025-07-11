@@ -1,0 +1,40 @@
+{% extends "AppBlog/base.html" %} {% load static %} {% block title %} Resultados
+de Profesores {% endblock %} {% block content %}
+<h1>Resultados de Profesores</h1>
+{% if keyword and filtro %}
+  <h4 class="mb-4">
+    Resultados de búsqueda por 
+    {% if filtro == "name" %}nombre
+    {% elif filtro == "last_name" %}apellido
+    {% elif filtro == "age" %}edad
+    {% elif filtro == "email" %}E-mail
+    {% elif filtro == "course" %}Curso
+    {% elif filtro == "college" %}Institución
+
+    {% else %}criterio desconocido
+    {% endif %}
+    que contiene "<strong>{{ keyword }}</strong>"
+  </h4>
+{% endif %}
+
+{% if teachers %}
+<div class="rounded">
+
+  <ul class="list-group gap-3 rounded">
+    {% for teacher in teachers %}
+    <li class="list-group-item">
+      <p><strong>Nombre:</strong> {{ teacher.name }}</p>
+      <p><strong>Apellio:</strong> {{ teacher.last_name }}</p>
+      <p><strong>Edad:</strong> {{ teacher.age }}</p>
+      <p><strong>E-mail:</strong> {{ teacher.email }}</p>
+      <p><strong>Curso:</strong> {{ teacher.course }}</p>
+      <p><strong>Institución:</strong> {{ teacher.college }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% else %}
+  <p class="text-muted">No se encontraron estudiantes que coincidan con la búsqueda.</p>
+{% endif %}
+
+{% endblock %}

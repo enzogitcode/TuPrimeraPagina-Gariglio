@@ -1,0 +1,36 @@
+{% extends 'AppBlog/base.html' %}
+
+{% block title %} Profesores {% endblock %}
+
+{% block content %}
+<h1>Lista de Profesores</h1>
+
+{% if teachers %}
+<div class="bg-light rounded">
+
+    <table class="table table-striped rounded table-hover">
+        <tr>
+            <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Edad</th>
+        <th>Email</th>
+        <th>Curso</th>
+        <th>Institución</th>
+    </tr>
+    {% for teacher in teachers %}
+    <tr>
+            <td>{{ teacher.name }}</td>
+            <td>{{ teacher.last_name }}</td>
+            <td>{{ teacher.age }}</td>
+            <td>{{ teacher.email }}</td>
+            <td>{{ teacher.course }}</td>
+            <td>{{ teacher.college }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% else %}
+    <p>No hay profesores registrados.</p>
+{% endif %}
+{% endblock %}

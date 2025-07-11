@@ -33,3 +33,4 @@ class PaperForm(forms.Form):
     subject = forms.CharField(max_length=500, label='Categoría')
     abstract = forms.CharField(widget=forms.Textarea, max_length=500, label='Resumen')
     text_paper = forms.CharField(widget=forms.Textarea, label='Texto del Artículo')
+
